@@ -49,10 +49,10 @@ Route::post('/accept-invitation', [FriendListController::class, 'acceptInvitatio
 
 Route::get('/forgot-password', function () {
     return view('forgotpassword');
-});
+})->middleware('auth');
 
-Route::post('/send-password-links', [LoginController::class, 'sendPasswordLink']);
+Route::post('/send-password-links', [LoginController::class, 'sendPasswordLink'])->middleware('auth');
 
-Route::get('/update-password/{id}', [LoginController::class, 'updatePassword'])->name('reset.password');
+Route::get('/update-password/{id}', [LoginController::class, 'updatePassword'])->name('reset.password')->middleware('auth');
 
-Route::post('/create-new-password', [LoginController::class, 'createNewPassword']);
+Route::post('/create-new-password', [LoginController::class, 'createNewPassword'])->middleware('auth');
