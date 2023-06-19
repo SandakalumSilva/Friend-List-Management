@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('friend_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('password')->nullable();
+            $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->boolean('email_verified_at')->default(0);
-            $table->string('otp')->nullable();
-            $table->rememberToken();
+            $table->string('user_id')->nullable();
+            $table->enum('invitation_type', ['sent', 'confirmed']);
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('friend_lists');
     }
 };
